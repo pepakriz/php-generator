@@ -69,7 +69,7 @@ class Method extends Member
 	 */
 	public function __construct($name = NULL)
 	{
-		$this->setName($name);
+		parent::__construct($name);
 	}
 
 
