@@ -5,6 +5,8 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 
+declare(strict_types=1);
+
 namespace Nette\PhpGenerator;
 
 use Nette;
@@ -69,7 +71,7 @@ class Factory
 		}
 		$method->setReturnReference($from->returnsReference());
 		$method->setVariadic($from->isVariadic());
-		$method->setComment(Helpers::unformatDocComment($from->getDocComment()));
+		$method->setComment(Helpers::unformatDocComment((string) $from->getDocComment()));
 		if (PHP_VERSION_ID >= 70000 && $from->hasReturnType()) {
 			$method->setReturnType((string) $from->getReturnType());
 			$method->setReturnNullable($from->getReturnType()->allowsNull());
@@ -116,7 +118,7 @@ class Factory
 		$prop->setValue(isset($defaults[$prop->getName()]) ? $defaults[$prop->getName()] : NULL);
 		$prop->setStatic($from->isStatic());
 		$prop->setVisibility($from->isPrivate() ? 'private' : ($from->isProtected() ? 'protected' : 'public'));
-		$prop->setComment(Helpers::unformatDocComment($from->getDocComment()));
+		$prop->setComment(Helpers::unformatDocComment((string) $from->getDocComment()));
 		return $prop;
 	}
 
