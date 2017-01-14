@@ -114,3 +114,7 @@ Assert::match(
 	"Nette\\PhpGenerator\\Helpers::createObject('TestDateTime', %A%)",
 	Helpers::dump(new TestDateTime('2016-06-22 20:52:43.1234', new DateTimeZone('Europe/Prague')))
 );
+
+Assert::exception(function () {
+	Helpers::dump(new class {});
+}, Nette\InvalidArgumentException::class, 'Cannot dump anonymous class.');
